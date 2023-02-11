@@ -36,12 +36,12 @@ class Fernet:
                 "Fernet key must be 32 url-safe base64-encoded bytes."
             ) from exc
 
-        self._signing_key = key[:int(len(key)/2)]
-        self._encryption_key = key[int(len(key)/2):]
+        self._signing_key = key[:16]
+        self._encryption_key = key[16:]
 
     @classmethod
     def generate_key(cls) -> bytes:
-        return base64.urlsafe_b64encode(os.urandom(64))
+        return base64.urlsafe_b64encode(os.urandom(32))
 
     def encrypt(self, data: bytes) -> bytes:
         return self.encrypt_at_time(data, int(time.time()))

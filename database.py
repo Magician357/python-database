@@ -1,8 +1,12 @@
 from customfernet import Fernet
 import string
 chars=[*string.printable]
+import os
+base=os.getcwd() 
 
-key="3NtkIiCSsX8KnylkJmqijxW17vUZ9hRKNF3NfFQDNzQPA0M7-0ZnvO2JD4lL2emwdgWDJkjYUZWvXHOHz-bS7w==" #Keep very safe or else
+print(Fernet.generate_key())
+
+key="iX6cFE1YAoZmlBMT0CmxAPShrfA7TxBzZGb4P4dacjc=" #Keep very safe or else
 
 def encrypt_fer(message: str, tkey: bytes) -> bytes:
     return Fernet(tkey).encrypt(message.encode()).decode()
@@ -20,14 +24,14 @@ def decode(text: bytes):
     return decrypt_fer(text,key)
 
 def compile_file(filenam: str):
-    with open("data/"+filenam,"r") as f:
+    with open("python-database\\data\\"+filenam,"r") as f:
         full=f.read()
     list=full.split("||")
     return tuple(tuple(thing.split("::")) for thing in list)
 
 def write_to_file(filenam:str,keyss:str,value:str):
     try:
-        f=open("data/"+filenam,"ab")
+        f=open("python-database\\data\\"+filenam,"ab")
         f.write(encode(keyss)+b"::"+encode(value)+b"||")
         f.close()
         return 1
