@@ -43,6 +43,5 @@ def get_from_file(filenam:str,keyss:str):
 if __name__=="__main__":
     keys="hello"
     values="world"
-    test="it worked"
     write_to_file("test",keys,values)
     print(get_from_file("test",keys))
